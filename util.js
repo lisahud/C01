@@ -3367,7 +3367,8 @@ function create_Arrays() {
 		arr_combined.push(items[i]);
 		if (items[i].Trial_cat==='Dis') {
 			for (let j = 0; j < images.length; j++) {
-				if (images[j].includes(items[i].Word1) && images[j].includes(items[i].Word2)) {
+        console.log(images[j].toLowerCase(),items[i].Word1.toLowerCase(),items[i].Word2)
+				if (images[j].toLowerCase().includes(items[i].Word1.toLowerCase()) && images[j].toLowerCase().includes(items[i].Word2.toLowerCase())) {
 					let img_trial = { 
 						Img: `<img src="distractors/${images[j]}" style="height:400px"></img>`,
 						Trial_cat: 'Dis_pic', 

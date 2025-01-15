@@ -133,7 +133,7 @@ timeline.push(instructions_c);
 // PAGES 4-66: EXPERIMENT
 var test_stimuli = create_Arrays()[0];
 var images = create_Arrays()[1];
-
+console.log(test_stimuli)
 
 var trial = {
 	type: jsPsych.timelineVariable('Type'),
