@@ -1,0 +1,53 @@
+X1	Pra	between	Gans	Löwe			12	13
+X2	Pra	between	Flamingo	Schnur			21	14
+X3	Pra	between	Ingwer	Giraffe			21	23
+X4	Dis	within	Regal	Sessel				
+X5	Pra	between	Pflaume	Trichter			12	24
+21	Exp	between	Taube	Kirsche	13111	21122	11	12
+14	Exp	between	Besen	Zwiebel	42221	23122	21	42
+28	Exp	between	Hase	Kirsche	32211	21122	21	32
+4	Dis	between	Tulpe	Zebra	
+20	Exp	between	Rabe	Kürbis	14211	24222	22	12
+9	Exp	within	Igel	Katze	34211	3112	21	33
+32	Exp	between	Taube	Besen	13111	42222	12	14
+36	Exp	between	Katze	Schere	31111	43122	11	34
+15	Exp	between	Spaten	Kürbis	44221	24222	22	42
+34	Exp	between	Rabe	Harke	14211	41122	21	14
+11	Dis	between	Qualle	Spargel				
+1	Exp	within	Kürbis	Apfel	24221	22222	22	22
+45	Exp	between	Ziege	Ente	33111	11112	11	31
+10	Exp	between	Besen	Apfel	42221	22222	22	42
+30	Exp	between	Adler	Spaten	12211	44222	22	14
+16	Dis	between	Lampe	Rose	
+44	Exp	between	Hase	Adler	32211	12212	22	31
+3	Exp	within	Schere	Besen	43121	42222	12	44
+26	Exp	between	Ziege	Zwiebel	33111	23122	11	32
+13	Exp	between	Schere	Kürbis	43121	24222	12	42
+47	Exp	between	Katze	Rabe	31111	14212	12	31
+22	Dis	within	Tiger	Kamel	
+43	Exp	between	Igel	Ente	34211	11112	21	31
+6	Exp	within	Rabe	Adler	14211	12212	22	11
+23	Exp	between	Taube	Apfel	13111	22222	12	12
+42	Exp	between	Ziege	Adler	33111	12212	12	31
+17	Exp	between	Harke	Zwiebel	41121	23122	11	42
+31	Exp	between	Ente	Schere	11111	43122	11	14
+29	Dis	between	Hocker	Pizza	
+8	Exp	within	Ziege	Hase	33111	32212	12	33
+24	Exp	between	Igel	Zwiebel	34211	23122	21	32
+12	Exp	between	Harke	Kirsche	41121	21122	11	42
+33	Dis	between	Mango	Robbe				
+48	Exp	between	Igel	Taube	34211	13112	21	31
+37	Exp	between	Katze	Besen	31111	42222	12	34
+2	Exp	within	Zwiebel	Kirsche	23121	21122	11	22
+27	Exp	between	Katze	Kürbis	31111	24222	12	32
+40	Exp	between	Hase	Spaten	32211	44222	22	34
+39	Dis	within	Gabel	Pinsel	
+35	Exp	between	Rabe	Spaten	14211	44222	22	14
+19	Exp	between	Adler	Kirsche	12211	21122	21	12
+5	Exp	within	Spaten	Harke	44221	41122	21	44
+25	Exp	between	Hase	Apfel	32211	22222	22	32
+38	Exp	between	Igel	Harke	34211	41122	21	34
+18	Exp	between	Ente	Apfel	11111	22222	12	12
+46	Dis	between	Gespenst	Zebra				
+41	Exp	between	Ziege	Schere	33111	43122	11	34
+7	Exp	within	Taube	Ente	13111	11112	11	11

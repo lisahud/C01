@@ -34,7 +34,7 @@ var irb = {
   required_message: "Um teilzunehmen, müssen Sie das Häkchen zur Bestätigung Ihrer Einwilligung setzen."
 };
 
-timeline.push(irb);
+//timeline.push(irb);
 
 //------------------------------------------------------------------------------
 // PAGE 2: NARRATIVE SCENARIO
@@ -45,13 +45,13 @@ var scenario = {
     choices: ['Weiter']
 };
 
-timeline.push(scenario);
+//timeline.push(scenario);
 
 
 // PAGE 3a: INSTRUCTIONS
 var trial_a = {
 	type: jsPsychSurveyText,
-	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das sie benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt. Bitte beziehen Sie dabei die Eigenschaften beider Wörter gleichermaßen mit ein und geben Sie ein einziges Wort an. Schreiben Sie dieses Wort <b>inklusive Artikel (der, die, das)</b> in die Textbox.</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
+	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das sie benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt. Bitte beziehen Sie dabei die Eigenschaften beider Wörter gleichermaßen mit ein und geben Sie ein einziges Wort an. Schreiben Sie dieses Wort <b>inklusive Artikel (der, die, das)</b> in die Textbox, zum Beispiel "die Haustür".</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
 	questions: [
 		{prompt: '<i>Bitte tragen Sie ein Wort ein</i>', required: true, rows: 1, columns: 20}
 	],
@@ -92,7 +92,7 @@ var instructions_a = {
 	repetitions: 1
 };
 
-timeline.push(instructions_a);
+//timeline.push(instructions_a);
 
 
 // PAGE 3b: INSTRUCTIONS
@@ -116,7 +116,7 @@ var instructions_b = {
 	button_label: "Weiter",	
 };
 
-timeline.push(instructions_b);
+//timeline.push(instructions_b);
 
 // PAGE 3c: INSTRUCTIONS
 var instructions_c = {
@@ -126,7 +126,7 @@ var instructions_c = {
 	choices: ["Weiter"]	
 };
 
-timeline.push(instructions_c);
+//timeline.push(instructions_c);
 
 
 //------------------------------------------------------------------------------
@@ -211,17 +211,17 @@ var trials = {
 	randomize_order: false,
 	repetitions: 1
 };
-timeline.push(trials);
+//timeline.push(trials);
 
 // PAGE 67: INSTRUCTIONS
 var instructions_d = {
 	type: jsPsychHtmlButtonResponse,
 	//preamble: `<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los"</p>`,
-	stimulus: '<p>Als nächstes sehen Sie noch einmal alle Bilder, die Ihnen während des Experiments gezeigt wurden. Bitte denken Sie daran, wie Sie sich das jeweilige Traumobjekt vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben. Beschreiben Sie, ob und was Sie am Bild ändern würden, damit es noch besser zu dem passt, was Sie sich vorgestellt haben.</p>',
+	stimulus: '<p>Als nächstes sehen Sie noch einmal alle Bilder, die Ihnen während des Experiments gezeigt wurden. Bitte erinnern Sie daran, wie Sie sich das jeweilige Traumobjekt vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben. Beschreiben Sie, ob und was Sie am Bild ändern würden, damit es noch besser zu dem passt, was Sie sich vorgestellt haben.</p>',
 	choices: ["Weiter"]	
 };
 
-timeline.push(instructions_d);
+//timeline.push(instructions_d);
 
 //------------------------------------------------------------------------------
 // PAGES 68-76: PICTURE RATING
@@ -269,15 +269,71 @@ var pic_trials = {
 	timeline_variables: images
 }
 
-timeline.push(pic_trials);
+//timeline.push(pic_trials);
 
 //------------------------------------------------------------------------------
+
+
+
+
+
 // PAGE 77: DEBRIEFING
+
+
+function addRow() {
+	const container = document.getElementById("inputContainer");
+
+	const newRow = document.createElement("div");
+	newRow.classList.add("input-row");
+
+	const textInput = document.createElement("input");
+	textInput.type = "text";
+	textInput.placeholder = "Frage " + (container.children.length + 1);
+	textInput.classList.add("text-input");
+
+	const select = document.createElement("select");
+	select.innerHTML = `
+		<option value="">Bitte auswählen</option>
+		<option value="Option1">Option 1</option>
+		<option value="Option2">Option 2</option>
+		<option value="Option3">Option 3</option>
+	`;
+
+	newRow.appendChild(textInput);
+	newRow.appendChild(select);
+	container.appendChild(newRow);
+
+	// Event Listener, um das Eingabefeld der vorherigen Zeile zu überwachen
+	textInput.addEventListener('input', function () {
+		if (textInput.value.trim() !== '') {
+			if (container.children.length === (container.querySelectorAll('.input-row').length)) {
+				addRow();
+			}
+		}
+	});
+}
+
+// Event Listener für die Überwachung des ersten Feldes
+document.querySelectorAll('.input-row input').forEach(input => {
+	input.addEventListener('input', function () {
+		const container = document.getElementById("inputContainer");
+		const lastRow = container.lastElementChild;
+		const lastTextInput = lastRow.querySelector("input");
+
+		// Wenn das letzte Eingabefeld ausgefüllt ist, eine neue Zeile hinzufügen
+		if (lastTextInput && lastTextInput.value.trim() !== "") {
+			addRow();
+		}
+	});
+});
+
+
+
 const debriefing = {
 	type: jsPsychSurvey,
-	
+
 	on_start: function() {
-		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length));
+		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length));	
 	},
 	
 	pages: [
@@ -332,7 +388,7 @@ const debriefing = {
 			},
 			{
 				type: 'html',
-				prompt: "Bei Fragen wenden Sie sich bitte an Alon Fishman unter alon.fishman@uni-bielefeld.de."
+				prompt: "Bei Fragen wenden Sie sich bitte an Jana Häussler unter jana.haeussler@uni-bielefeld.de."
 			}
 		]
 	]
@@ -341,3 +397,6 @@ const debriefing = {
 timeline.push(debriefing);
 
 jsPsych.run(timeline)
+
+
+
