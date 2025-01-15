@@ -34,7 +34,7 @@ var irb = {
   required_message: "Um teilzunehmen, müssen Sie das Häkchen zur Bestätigung Ihrer Einwilligung setzen."
 };
 
-//timeline.push(irb);
+timeline.push(irb);
 
 //------------------------------------------------------------------------------
 // PAGE 2: NARRATIVE SCENARIO
@@ -45,7 +45,7 @@ var scenario = {
     choices: ['Weiter']
 };
 
-//timeline.push(scenario);
+timeline.push(scenario);
 
 
 // PAGE 3a: INSTRUCTIONS
@@ -92,7 +92,7 @@ var instructions_a = {
 	repetitions: 1
 };
 
-//timeline.push(instructions_a);
+timeline.push(instructions_a);
 
 
 // PAGE 3b: INSTRUCTIONS
@@ -116,7 +116,7 @@ var instructions_b = {
 	button_label: "Weiter",	
 };
 
-//timeline.push(instructions_b);
+timeline.push(instructions_b);
 
 // PAGE 3c: INSTRUCTIONS
 var instructions_c = {
@@ -126,7 +126,7 @@ var instructions_c = {
 	choices: ["Weiter"]	
 };
 
-//timeline.push(instructions_c);
+timeline.push(instructions_c);
 
 
 //------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ var trials = {
 	randomize_order: false,
 	repetitions: 1
 };
-//timeline.push(trials);
+timeline.push(trials);
 
 // PAGE 67: INSTRUCTIONS
 var instructions_d = {
@@ -221,7 +221,7 @@ var instructions_d = {
 	choices: ["Weiter"]	
 };
 
-//timeline.push(instructions_d);
+timeline.push(instructions_d);
 
 //------------------------------------------------------------------------------
 // PAGES 68-76: PICTURE RATING
@@ -269,7 +269,7 @@ var pic_trials = {
 	timeline_variables: images
 }
 
-//timeline.push(pic_trials);
+timeline.push(pic_trials);
 
 //------------------------------------------------------------------------------
 
