@@ -1,21 +1,42 @@
 const jsPsych = initJsPsych({
-	//on_finish: function (data) {
+	on_finish: function (data) {
 		//jsPsych.data.displayData('csv');
-		//proliferate.submit({"trials": data.values()});
-	//},
+		proliferate.submit({"trials": data.values()});
+	},
 	show_progress_bar: true, // doesn't automatically work with nested timelines and timeline variables
-	auto_update_progress_bar: false
+	auto_update_progress_bar: false,
+	message_progress_bar: 'Bearbeitungsfortschritt'
 });
 
 let timeline = [];
+
+var test_stimuli = create_Arrays()[0];
+var images = create_Arrays()[1];
 
 var preload = {
     type: jsPsychPreload,
     auto_preload: true
 }
-
 timeline.push(preload);
 
+var image_paths = [
+	"distractors/Maus_Erdbeere.png",
+	"distractors/Sessel_Regal.png",
+	"distractors/Tulpe_Zebra.jpeg",
+	"distractors/Spargel_Qualle.png",
+	"distractors/Rose_Lampe_2.png",
+	"distractors/Kamel_Tiger.png",
+	"distractors/Pizza_Hocker.jpeg",
+	"distractors/Robbe_Mango_2.png",
+	"distractors/Pinsel_Gabel_2.png",
+	"distractors/Gespenst_Zebra.png"
+]
+var preload_img = {
+    type: jsPsychPreload,
+    images: image_paths,
+}
+
+timeline.push(preload_img);
 //------------------------------------------------------------------------------
 // PAGE 1: LANDING PAGE
 var irb = {
@@ -31,7 +52,8 @@ var irb = {
       required: true,
     }
   ],
-  required_message: "Um teilzunehmen, müssen Sie das Häkchen zur Bestätigung Ihrer Einwilligung setzen."
+  required_message: "Um teilzunehmen, müssen Sie das Häkchen zur Bestätigung Ihrer Einwilligung setzen.",
+  button_label: ['Weiter']
 };
 
 timeline.push(irb);
@@ -42,7 +64,10 @@ var scenario = {
 	type: jsPsychHtmlButtonResponse,
 	stimulus: `<p>Stellen Sie sich nun vor, dass Sie letzte Nacht einen langen Traum hatten. Sie erinnern sich noch gut an alles, was Sie in Ihrem Traum erlebt und gesehen haben. Offensichtlich waren Sie in einer fremden Welt unterwegs, in der es allerlei Lebewesen, Gegenstände, Pflanzen, Möbelstücke, Obst und Gemüse gab, die Sie so aus unserer Welt nicht kannten. Aufgeregt erzählen Sie einer befreundeten Person von Ihren Traumerlebnissen und erfinden dazu Wörter für all die unbekannten Dinge. Sie möchten, dass Ihr*e Freund*in sich alles gut vorstellen kann und versuchen deshalb ein möglichst treffendes Wort zu finden. 
 </p><p>Mit Klick auf „Weiter“ gelangen Sie zur genauen Erklärung Ihrer Aufgabe.</p><p></p><br>`,
-    choices: ['Weiter']
+    choices: ['Weiter'],
+	data: {
+		list: selectedListName
+	}
 };
 
 timeline.push(scenario);
@@ -51,7 +76,7 @@ timeline.push(scenario);
 // PAGE 3a: INSTRUCTIONS
 var trial_a = {
 	type: jsPsychSurveyText,
-	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das sie benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt. Bitte beziehen Sie dabei die Eigenschaften beider Wörter gleichermaßen mit ein und geben Sie ein einziges Wort an. Schreiben Sie dieses Wort <b>inklusive Artikel (der, die, das)</b> in die Textbox, zum Beispiel "die Haustür".</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
+	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das sie benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt. Bitte beziehen Sie dabei die <b>Eigenschaften beider Wörter gleichermaßen</b> mit ein und geben Sie ein einziges Wort an. Schreiben Sie dieses Wort <b>inklusive Artikel (der, die, das)</b> in die Textbox, zum Beispiel "die Haustür".</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
 	questions: [
 		{prompt: '<i>Bitte tragen Sie ein Wort ein</i>', required: true, rows: 1, columns: 20}
 	],
@@ -84,7 +109,7 @@ var instructions_a = {
 			},
 			
 		on_start: function() { //we use on_start instead of on_finish to allow nameCounter to update
-			jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length));
+			jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));
 		}
 	}
 	],
@@ -122,7 +147,7 @@ timeline.push(instructions_b);
 var instructions_c = {
 	type: jsPsychHtmlButtonResponse,
 	//preamble: `<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los"</p>`,
-	stimulus: '<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los.</p>',
+	stimulus: '<p><i>Alles verstanden? Dann geht es mit Klick auf "Weiter" los.</i></p><ul style="list-style:none; text-align:left"><li>Bitte denken Sie daran,</li></ul><ul style="text-align:left"><li>ein <b>einziges</b> neues Wort inklusive <b>Artikel</b> (der, die, das) zu erfinden,</li><li>die Eigenschaften <b>beider</b> Wörter gleichermaßen einzubeziehen und</li><li>ein möglichst <b>treffendes</b> Wort zu erfinden, sodass sich ihr*e Freund*in die Traumerscheinung gut vorstellen kann.</li></ul>',
 	choices: ["Weiter"]	
 };
 
@@ -131,10 +156,6 @@ timeline.push(instructions_c);
 
 //------------------------------------------------------------------------------
 // PAGES 4-66: EXPERIMENT
-var test_stimuli = create_Arrays()[0];
-var images = create_Arrays()[1];
-console.log(test_stimuli)
-
 var trial = {
 	type: jsPsych.timelineVariable('Type'),
 	preamble: function(){
@@ -154,7 +175,7 @@ var trial = {
 			var quest = [
 				{
 					prompt: `<i>Entspricht obiges Bild dem Bild, das Sie für "${Dis_responses[Dis_responses.length - 1]}" im Kopf hatten?</i>`,
-					name: 'Dis_pic',
+					name: 'Q0',
 					options: ['Ja', 'Nein'],
 					required: true,
 					horizontal: false
@@ -203,7 +224,7 @@ var trials = {
 			},
 			
 		on_start: function() { //we use on_start instead of on_finish to allow nameCounter to update
-			jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length));
+			jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));
 		}
 	}
 	],
@@ -217,8 +238,11 @@ timeline.push(trials);
 var instructions_d = {
 	type: jsPsychHtmlButtonResponse,
 	//preamble: `<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los"</p>`,
-	stimulus: '<p>Als nächstes sehen Sie noch einmal alle Bilder, die Ihnen während des Experiments gezeigt wurden. Bitte erinnern Sie daran, wie Sie sich das jeweilige Traumobjekt vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben. Beschreiben Sie, ob und was Sie am Bild ändern würden, damit es noch besser zu dem passt, was Sie sich vorgestellt haben.</p>',
-	choices: ["Weiter"]	
+	stimulus: '<p>Als nächstes sehen Sie noch einmal alle Bilder, die Ihnen während des Experiments gezeigt wurden. Bitte erinnern Sie sich daran, wie Sie sich das jeweilige Traumobjekt vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben. Beschreiben Sie, ob und was Sie am Bild ändern würden, damit es noch besser zu dem passt, was Sie sich vorgestellt haben.</p>',
+	choices: ["Weiter"],
+	on_start: function() {
+		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));	
+	},
 };
 
 timeline.push(instructions_d);
@@ -232,7 +256,7 @@ var pic_rating = {
     type: jsPsychSurveyText,
 
 	on_start: function() { //we use on_start instead of on_finish to allow nameCounter to update
-		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length));
+		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));
 		nameCounter++;
 	},
 
@@ -273,128 +297,135 @@ timeline.push(pic_trials);
 
 //------------------------------------------------------------------------------
 
-
-
-
-
 // PAGE 77: DEBRIEFING
-
-
-function addRow() {
-	const container = document.getElementById("inputContainer");
-
-	const newRow = document.createElement("div");
-	newRow.classList.add("input-row");
-
-	const textInput = document.createElement("input");
-	textInput.type = "text";
-	textInput.placeholder = "Frage " + (container.children.length + 1);
-	textInput.classList.add("text-input");
-
-	const select = document.createElement("select");
-	select.innerHTML = `
-		<option value="">Bitte auswählen</option>
-		<option value="Option1">Option 1</option>
-		<option value="Option2">Option 2</option>
-		<option value="Option3">Option 3</option>
-	`;
-
-	newRow.appendChild(textInput);
-	newRow.appendChild(select);
-	container.appendChild(newRow);
-
-	// Event Listener, um das Eingabefeld der vorherigen Zeile zu überwachen
-	textInput.addEventListener('input', function () {
-		if (textInput.value.trim() !== '') {
-			if (container.children.length === (container.querySelectorAll('.input-row').length)) {
-				addRow();
-			}
-		}
-	});
-}
-
-// Event Listener für die Überwachung des ersten Feldes
-document.querySelectorAll('.input-row input').forEach(input => {
-	input.addEventListener('input', function () {
-		const container = document.getElementById("inputContainer");
-		const lastRow = container.lastElementChild;
-		const lastTextInput = lastRow.querySelector("input");
-
-		// Wenn das letzte Eingabefeld ausgefüllt ist, eine neue Zeile hinzufügen
-		if (lastTextInput && lastTextInput.value.trim() !== "") {
-			addRow();
-		}
-	});
-});
-
-
-
-const debriefing = {
+  
+var debriefing = {
 	type: jsPsychSurvey,
-
-	on_start: function() {
-		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length));	
-	},
-	
-	pages: [
-		[
+	survey_json: {
+		elements: [
 			{
 				type: 'html',
-				prompt: 'Das ist das Ende des Experiments. Um uns bei der Analyse der Ergebnisse zu helfen, beantworten Sie bitte die folgenden Fragen.'
+				name: 'html1',
+				html: '<p>Das ist das Ende des Experiments. Um uns bei der Analyse der Ergebnisse zu helfen, beantworten Sie bitte die folgenden Fragen.</p>'
 			},
 			{
-				type: 'drop-down',
-				prompt: 'Geschlecht',
+				type: 'dropdown',
+				title: 'Geschlecht',
 				name: 'gender',
-				options: ['Weiblich','Männlich','Divers']
+				choices: ['Weiblich','Männlich','Divers'],
+				isRequired: true,
+				placeholder: "Auswählen...",
+				searchEnabled: false,
 			},
 			{
 				type: 'text',
-				prompt: 'Alter',
+				title: 'Alter',
 				name: 'age',
-				textbox_columns: 10
+				isRequired: true,
+				validators: [
+					{ type: "numeric", text: "Wert muss eine Zahl sein" }
+				]
 			},
 			{
 				type: 'text',
-				prompt: 'Muttersprache(n)',
+				title: 'Muttersprache(n)',
 				name: 'first_language',
-				textbox_columns: 20
+				isRequired: true,
 			},
-			
+			{
+				type: "paneldynamic",
+				name: "other_languages",
+				witdth: "100%",
+				//minWidth: "256px",
+				title: "Weitere Sprachen und geschätztes Niveau",
+				//titleLocation: "hidden",
+				templateElements: [
+					{
+						name: "other_language",
+						type: "text",
+						title: "Sprache",
+						//width: '50%',
+						maxWidth: "50%",
+					},
+					{
+						name: "language_proficiency",
+						type: "dropdown",
+						title: "Niveau",
+						//inputType: "email",
+						//"placeholder": "foobar@example.com",
+						placeholder: "Auswählen...",
+						width: '50%',
+						maxWidth: "50%",
+						startWithNewLine: false,
+						choices: ['Grundlagen','Fortgeschritten','Fließend'],
+						searchEnabled: false,
+					}
+				],
+				panelCount: 1,
+				minPanelCount: 1,
+				//confirmDeleteText: "Do you want to delete the passenger?",
+				panelAddText: "Zeile hinzufügen",
+				panelRemoveText: "Entfernen",
+			},
 			{
 				type: 'text',
-				prompt: 'Welche Ihrer genannten Sprachen, inklusive Ihrer Muttersprache(n), sprechen Sie täglich am meisten?',
+				title: 'Welche Ihrer genannten Sprachen, inklusive Ihrer Muttersprache(n), sprechen Sie täglich am meisten?',
 				name: 'daily_language',
-				textbox_columns: 20
+				isRequired: true,
 			},
 			{
-				type: 'drop-down',
-				prompt: 'Höchster Bildungsabschluss',
-				name: 'gender',
-				options: ['noch Schüler','Schule beendet ohne Abschluss','Hauptschulabschluss/ Volksschulabschluss','Realschulabschluss (Mittlere Reife)','Fachhochschulreife (Abschluss einer Fachoberschule)','Abitur, allgemeine oder fachgebundene Hochschulreife (Gymnasium bzw. EOS)','abgeschlossene Berufsausbildung','Meisterprüfung','Bachelor','Master','Promotion']
+				type: 'dropdown',
+				title: 'Höchster Bildungsabschluss',
+				name: 'educational_background',
+				choices: ['noch Schüler','Schule beendet ohne Abschluss','Hauptschulabschluss/ Volksschulabschluss','Realschulabschluss (Mittlere Reife)','Fachhochschulreife (Abschluss einer Fachoberschule)','Abitur, allgemeine oder fachgebundene Hochschulreife','abgeschlossene Berufsausbildung','Meisterprüfung','Bachelor','Master','Promotion'],
+				isRequired: true,
+				placeholder: "Auswählen...",
+				searchEnabled: false,
 			},
 			{
-				type: 'multi-choice',
-				prompt: 'Haben Sie die Anweisungen gelesen und glauben Sie, dass Sie die Studie richtig durchgeführt haben?',
+				type: 'radiogroup',
+				title: 'Haben Sie die Anweisungen gelesen und glauben Sie, dass Sie die Studie richtig durchgeführt haben?',
 				name: 'read',
-				options: ['Nein','Ja','Ich war verwirrt']
+				choices: ['Nein','Ja','Ich war verwirrt'],
+				isRequired: true,
 			},
 			{
-				type: 'text',
-				prompt: 'Haben Sie irgendwelche Anmerkungen, z. B. zum Experimentablauf, zu der Art und Weise, wie Sie die Wörter erfunden haben, zu den Bildern oder zu etwas anderem? Wir freuen uns über jede Rückmeldung.',
+				type: 'comment',
+				title: 'Haben Sie irgendwelche Anmerkungen, z. B. zum Experimentablauf, zu der Art und Weise, wie Sie die Wörter erfunden haben, zu den Bildern oder zu etwas anderem? Wir freuen uns über jede Rückmeldung.',
 				name: 'comments',
-				textbox_columns: 30,
-				textbox_rows: 3
+				rows: 3,
 			},
 			{
 				type: 'html',
-				prompt: "Bei Fragen wenden Sie sich bitte an Jana Häussler unter jana.haeussler@uni-bielefeld.de."
+				name: 'html2',
+				html: '<p>Bei Fragen wenden Sie sich bitte an Jana Häussler unter jana.haeussler@uni-bielefeld.de.</p>'
 			}
-		]
-	]
+		],
+		showQuestionNumbers: false,
+		completeText: "Weiter",
+		//fitToContainer: true
+	},
+	on_start: function() {
+		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));	
+	},
 };
 
 timeline.push(debriefing);
+
+//------------------------------------------------------------------------------
+
+// PAGE 78: THANK YOU NOTE
+
+var outro = {
+	type: jsPsychHtmlButtonResponse,
+	stimulus: "<p>Das Experiment ist nun zu Ende. Bitte klicken Sie auf „Weiter“, um Ihre Antworten zu speichern und zurück zu Prolific zu gelangen.</p><p>Vielen herzlichen Dank für Ihre Teilnahme!</p>",
+	choices: ["Weiter"],
+	on_start: function() {
+		jsPsych.setProgressBar(1);	
+	},
+};
+
+timeline.push(outro);
 
 jsPsych.run(timeline)
 

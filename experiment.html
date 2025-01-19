@@ -13,12 +13,16 @@
 		<script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>	
 		<script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
 
-		<!-- survey plugins -->
-		<script src="https://unpkg.com/@jspsych/plugin-survey@0.2.2"></script>
+		<!-- survey plugins 
+		 <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.2"></script>
+		-->
+		<script src="https://unpkg.com/@jspsych/plugin-survey@1.0.1"></script>
 		<script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
 		<script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
 		<script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.3"></script>
 		<script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
+		<!-- survey css -->
+		<link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@1.0.1/css/survey.css">
 		
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,10 +32,24 @@
 		<!--custom js scripts-->
 		<script src="util.js"></script>
 		<script src="experiment.js"></script>
+
 		
 		<title>Sprachexperiment</title>
 		
 	    <meta charset="utf-8">
+
+		<style>
+			/* removes the star from obligatory questions */
+			.required {
+				display: none;
+			}
+
+			.jspsych-body {
+				margin-left: 10%;
+  				margin-right: 10%;
+			}
+		</style>
+		  
 				
 	</head>
 
