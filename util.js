@@ -3333,7 +3333,7 @@ var lists = {
 
 var images = [
 	"Sessel_Regal.png",
-	"Tulpe_Zebra.jpeg",
+	"Tulpe_Zebra.jpg",
 	"Spargel_Qualle.png",
 	"Rose_Lampe_2.png",
 	"Kamel_Tiger.png",
@@ -3402,7 +3402,7 @@ var repeat_loop = false; //a "switch" variable for looping
 
 var repeat_message = { //a full slide for telling participants they got it wrong
 	type: jsPsychHtmlButtonResponse,
-	stimulus: 'Bitte denken Sie daran, einen <b>Artikel</b> (der, die, das) zu verwenden und<br>das Objekt nur mit <b>genau einem Wort</b> zu benennen, ohne Leerzeichen oder Satzzeichen.<br/><br/>',
+	stimulus: 'Bitte denken Sie daran, einen <b>Artikel</b> (der, die, das) zu verwenden und<br>die Traumerscheinung nur mit <b>genau einem Wort</b> zu benennen, ohne Leerzeichen oder Satzzeichen.<br/><br/>',
 	choices: ['Zurück']
 }; 
 

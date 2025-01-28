@@ -20,9 +20,9 @@ var preload = {
 timeline.push(preload);
 
 var image_paths = [
-	"distractors/Maus_Erdbeere.png",
+	"distractors/Erdbeermaus.jpg",
 	"distractors/Sessel_Regal.png",
-	"distractors/Tulpe_Zebra.jpeg",
+	"distractors/Tulpe_Zebra.jpg",
 	"distractors/Spargel_Qualle.png",
 	"distractors/Rose_Lampe_2.png",
 	"distractors/Kamel_Tiger.png",
@@ -41,8 +41,7 @@ timeline.push(preload_img);
 // PAGE 1: LANDING PAGE
 var irb = {
   type: jsPsychSurveyMultiSelect,
-  preamble: `<p>Liebe*r Teilnehmer*in, vielen Dank für Ihr Interesse an unserer Studie.</p><p>Dieses Experiment sollte nicht länger 
-			als 10 Minuten dauern. Die Datenerhebung erfolgt anonym.<br>Weitere Informationen zu dieser Forschung und Ihren Rechten als Teilnehmer*in finden Sie 
+  preamble: `<p>Liebe*r Teilnehmer*in, vielen Dank für Ihr Interesse an unserer Studie.</p><p>Dieses Experiment dauert etwa 25 Minuten. Die Datenerhebung erfolgt anonym.<br>Weitere Informationen zu dieser Studie und Ihren Rechten als Teilnehmer*in finden Sie 
 			<a href="Information_für_Teilnehmende.pdf" target="_blank" rel="noopener noreferrer">hier</a>.</p>`,
   questions: [
     {
@@ -62,7 +61,7 @@ timeline.push(irb);
 // PAGE 2: NARRATIVE SCENARIO
 var scenario = {
 	type: jsPsychHtmlButtonResponse,
-	stimulus: `<p>Stellen Sie sich nun vor, dass Sie letzte Nacht einen langen Traum hatten. Sie erinnern sich noch gut an alles, was Sie in Ihrem Traum erlebt und gesehen haben. Offensichtlich waren Sie in einer fremden Welt unterwegs, in der es allerlei Lebewesen, Gegenstände, Pflanzen, Möbelstücke, Obst und Gemüse gab, die Sie so aus unserer Welt nicht kannten. Aufgeregt erzählen Sie einer befreundeten Person von Ihren Traumerlebnissen und erfinden dazu Wörter für all die unbekannten Dinge. Sie möchten, dass Ihr*e Freund*in sich alles gut vorstellen kann und versuchen deshalb ein möglichst treffendes Wort zu finden. 
+	stimulus: `<p>Stellen Sie sich nun vor, dass Sie letzte Nacht einen langen Traum hatten. Sie erinnern sich noch gut an alles, was Sie in Ihrem Traum erlebt und gesehen haben. Offensichtlich waren Sie in einer fremden Welt unterwegs, in der es allerlei Lebewesen, Gegenstände, Pflanzen, Möbelstücke, Obst und Gemüse gab, die Sie so aus unserer Welt nicht kannten. Aufgeregt erzählen Sie einer befreundeten Person von Ihren Traumerlebnissen und erfinden dazu Wörter für all die unbekannten Dinge. Sie möchten, dass Ihr*e Freund*in sich alles gut vorstellen kann und versuchen deshalb ein möglichst treffendes Wort zu erfinden. 
 </p><p>Mit Klick auf „Weiter“ gelangen Sie zur genauen Erklärung Ihrer Aufgabe.</p><p></p><br>`,
     choices: ['Weiter'],
 	data: {
@@ -76,7 +75,7 @@ timeline.push(scenario);
 // PAGE 3a: INSTRUCTIONS
 var trial_a = {
 	type: jsPsychSurveyText,
-	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das sie benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt. Bitte beziehen Sie dabei die <b>Eigenschaften beider Wörter gleichermaßen</b> mit ein und geben Sie ein einziges Wort an. Schreiben Sie dieses Wort <b>inklusive Artikel (der, die, das)</b> in die Textbox, zum Beispiel "die Haustür".</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
+	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter für Dinge gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das diese benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt, und beziehen Sie dabei bitte die <b>beiden Teile der Traumerscheinung gleichermaßen</b> mit ein. Schreiben Sie dieses Wort <b><nobr>mit Artikel (der, die, das)</nobr></b> in die Textbox, zum Beispiel „die Haustür“.</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
 	questions: [
 		{prompt: '<i>Bitte tragen Sie ein Wort ein</i>', required: true, rows: 1, columns: 20}
 	],
@@ -123,8 +122,8 @@ timeline.push(instructions_a);
 // PAGE 3b: INSTRUCTIONS
 var instructions_b = {
 	type: jsPsychSurveyMultiChoice,
-	preamble: `<p>In manchen Durchgängen sehen Sie ein Bild zu Ihrem erfundenen Wort, sobald Sie den Namen angegeben und auf „Weiter“ geklickt haben. Sie werden dann gefragt, ob es Ihrem eigenen Bild entspricht, das Sie im Kopf hatten. Bitte entscheiden Sie sich für „Ja“ oder „Nein“ und fahren dann mit dem nächsten Durchgang fort.</p><p>Hier ein Beispiel:</p><br/>
-	<img src="distractors/Maus_Erdbeere.png" style="height:400px"></img>`,
+	preamble: `<p>In manchen Durchgängen sehen Sie ein Bild zu Ihrem erfundenen Wort, sobald Sie es eingegeben und auf „Weiter“ geklickt haben. Sie werden dann gefragt, ob es dem Bild entspricht, das Sie im Kopf hatten. Bitte entscheiden Sie sich für „Ja“ oder „Nein“ und fahren dann mit dem nächsten Durchgang fort.</p><p>Hier ein Beispiel:</p><br/>
+	<img src="distractors/Erdbeermaus.jpg" style="height:400px"></img>`,
 	questions: [
 		{
 			prompt: function() {
@@ -147,7 +146,7 @@ timeline.push(instructions_b);
 var instructions_c = {
 	type: jsPsychHtmlButtonResponse,
 	//preamble: `<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los"</p>`,
-	stimulus: '<p><i>Alles verstanden? Dann geht es mit Klick auf "Weiter" los.</i></p><ul style="list-style:none; text-align:left"><li>Bitte denken Sie daran,</li></ul><ul style="text-align:left"><li>ein <b>einziges</b> neues Wort inklusive <b>Artikel</b> (der, die, das) zu erfinden,</li><li>die Eigenschaften <b>beider</b> Wörter gleichermaßen einzubeziehen und</li><li>ein möglichst <b>treffendes</b> Wort zu erfinden, sodass sich ihr*e Freund*in die Traumerscheinung gut vorstellen kann.</li></ul>',
+	stimulus: '<p><i>Alles verstanden? Dann geht es mit Klick auf „Weiter“ los.</i></p><ul style="list-style:none; text-align:left"><li>Bitte denken Sie daran,</li></ul><ul style="text-align:left"><li>ein <b>einziges</b> neues Wort mit <nobr><b>Artikel</b> (der, die, das)</nobr> einzugeben,</li><li><b>beide</b> Teile der Traumerscheinung gleichermaßen einzubeziehen und</li><li>ein möglichst <b>treffendes</b> Wort zu erfinden, sodass sich Ihr*e Freund*in die Traumerscheinung gut vorstellen kann.</li></ul><br/>',
 	choices: ["Weiter"]	
 };
 
@@ -216,6 +215,7 @@ var trials = {
 
 			if(lastResponse!=undefined && phase==='Dis') {
 				const det = /^(der|die|das|ein|eine)\s+/i;
+				//const det = /^(d.{1,4}|ein|eine)\s+/i;
 				let noDeterminer = lastResponse.replace(det,'');
 				Dis_responses.push(noDeterminer)
 			}
@@ -238,7 +238,7 @@ timeline.push(trials);
 var instructions_d = {
 	type: jsPsychHtmlButtonResponse,
 	//preamble: `<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los"</p>`,
-	stimulus: '<p>Als nächstes sehen Sie noch einmal alle Bilder, die Ihnen während des Experiments gezeigt wurden. Bitte erinnern Sie sich daran, wie Sie sich das jeweilige Traumobjekt vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben. Beschreiben Sie, ob und was Sie am Bild ändern würden, damit es noch besser zu dem passt, was Sie sich vorgestellt haben.</p>',
+	stimulus: '<p>Als nächstes sehen Sie noch einmal alle Bilder, die Ihnen während des Experiments gezeigt wurden. Bitte erinnern Sie sich daran, wie Sie sich Ihre Traumerscheinung vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben. Beschreiben Sie, ob und was Sie am Bild ändern würden, damit es noch besser zu dem passt, was Sie sich vorgestellt haben.</p><br/>',
 	choices: ["Weiter"],
 	on_start: function() {
 		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));	
@@ -264,7 +264,7 @@ var pic_rating = {
     questions: [
         {
             prompt: function() {
-                prompt_text = `<p>Was würden Sie an diesem Bild ändern, damit es besser zu dem passt, was Sie sich unter "${Dis_responses[position]}" vorgestellt haben, als Sie die Wörter zum ersten Mal gesehen haben?</p><br>`;
+                prompt_text = `<p>Was würden Sie an diesem Bild ändern, damit es besser zu dem passt, was Sie sich unter „${Dis_responses[position]}“ vorgestellt haben?</p><br>`;
 				position = position+1;
 				return prompt_text
 			},
@@ -312,7 +312,7 @@ var debriefing = {
 				type: 'dropdown',
 				title: 'Geschlecht',
 				name: 'gender',
-				choices: ['Weiblich','Männlich','Divers'],
+				choices: ['Weiblich','Männlich','Divers','keine Angabe'],
 				isRequired: true,
 				placeholder: "Auswählen...",
 				searchEnabled: false,
@@ -377,28 +377,27 @@ var debriefing = {
 				type: 'dropdown',
 				title: 'Höchster Bildungsabschluss',
 				name: 'educational_background',
-				choices: ['noch Schüler','Schule beendet ohne Abschluss','Hauptschulabschluss/ Volksschulabschluss','Realschulabschluss (Mittlere Reife)','Fachhochschulreife (Abschluss einer Fachoberschule)','Abitur, allgemeine oder fachgebundene Hochschulreife','abgeschlossene Berufsausbildung','Meisterprüfung','Bachelor','Master','Promotion'],
+				choices: ['noch Schüler','Schule beendet ohne Abschluss','Hauptschulabschluss/Volksschulabschluss','Realschulabschluss (Mittlere Reife)','Fachhochschulreife (Abschluss einer Fachoberschule)','Abitur, allgemeine oder fachgebundene Hochschulreife','abgeschlossene Berufsausbildung','Meisterprüfung','Bachelor','Master','Promotion'],
 				isRequired: true,
 				placeholder: "Auswählen...",
 				searchEnabled: false,
 			},
 			{
-				type: 'radiogroup',
-				title: 'Haben Sie die Anweisungen gelesen und glauben Sie, dass Sie die Studie richtig durchgeführt haben?',
+				type: 'text',
+				title: 'Wie klar fanden Sie die Anweisungen zu Beginn?',
 				name: 'read',
-				choices: ['Nein','Ja','Ich war verwirrt'],
 				isRequired: true,
 			},
 			{
 				type: 'comment',
 				title: 'Haben Sie irgendwelche Anmerkungen, z. B. zum Experimentablauf, zu der Art und Weise, wie Sie die Wörter erfunden haben, zu den Bildern oder zu etwas anderem? Wir freuen uns über jede Rückmeldung.',
 				name: 'comments',
-				rows: 3,
+				rows: 4,
 			},
 			{
 				type: 'html',
 				name: 'html2',
-				html: '<p>Bei Fragen wenden Sie sich bitte an Jana Häussler unter jana.haeussler@uni-bielefeld.de.</p>'
+				html: '<p>Bei Fragen wenden Sie sich bitte an Jana Häussler unter <a href="mailto:jana.haeussler@uni-bielefeld.de">jana.haeussler@uni-bielefeld.de</a>.</p>'
 			}
 		],
 		showQuestionNumbers: false,
@@ -418,7 +417,7 @@ timeline.push(debriefing);
 
 var outro = {
 	type: jsPsychHtmlButtonResponse,
-	stimulus: "<p>Das Experiment ist nun zu Ende. Bitte klicken Sie auf „Weiter“, um Ihre Antworten zu speichern und zurück zu Prolific zu gelangen.</p><p>Vielen herzlichen Dank für Ihre Teilnahme!</p>",
+	stimulus: "<p>Das Experiment ist nun zu Ende. Bitte klicken Sie auf „Weiter“, um Ihre Antworten zu speichern und zurück zu Prolific zu gelangen.</p><p>Vielen herzlichen Dank für Ihre Teilnahme!</p><br/>",
 	choices: ["Weiter"],
 	on_start: function() {
 		jsPsych.setProgressBar(1);	
