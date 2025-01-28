@@ -20,7 +20,7 @@ var preload = {
 timeline.push(preload);
 
 var image_paths = [
-	"distractors/Erdbeermaus.jpg",
+	"distractors/Erdbeermaus.JPG",
 	"distractors/Sessel_Regal.png",
 	"distractors/Tulpe_Zebra.jpg",
 	"distractors/Spargel_Qualle.png",
@@ -123,7 +123,7 @@ timeline.push(instructions_a);
 var instructions_b = {
 	type: jsPsychSurveyMultiChoice,
 	preamble: `<p>In manchen Durchgängen sehen Sie ein Bild zu Ihrem erfundenen Wort, sobald Sie es eingegeben und auf „Weiter“ geklickt haben. Sie werden dann gefragt, ob es dem Bild entspricht, das Sie im Kopf hatten. Bitte entscheiden Sie sich für „Ja“ oder „Nein“ und fahren dann mit dem nächsten Durchgang fort.</p><p>Hier ein Beispiel:</p><br/>
-	<img src="distractors/Erdbeermaus.jpg" style="height:400px"></img>`,
+	<img src="distractors/Erdbeermaus.JPG" style="height:400px"></img>`,
 	questions: [
 		{
 			prompt: function() {
