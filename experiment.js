@@ -193,7 +193,7 @@ var trial = {
 		Word1: jsPsych.timelineVariable('Word1'),
 		Word2: jsPsych.timelineVariable('Word2'),
 		Gender_comb: jsPsych.timelineVariable('Gender_comb'),
-		Cat_comb: jsPsych.timelineVariable('Cat_comb'),
+		Cat_comb: jsPsych.timelineVariable('Cat_comb')
 	},
 };
 
@@ -242,7 +242,7 @@ var instructions_d = {
 	choices: ["Weiter"],
 	on_start: function() {
 		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));	
-	},
+	}
 };
 
 timeline.push(instructions_d);
@@ -403,6 +403,9 @@ var debriefing = {
 		showQuestionNumbers: false,
 		completeText: "Weiter",
 		//fitToContainer: true
+	},
+	data: {
+		Task: 'Survey'
 	},
 	on_start: function() {
 		jsPsych.setProgressBar((nameCounter) / (test_stimuli.length + images.length + 2));	
