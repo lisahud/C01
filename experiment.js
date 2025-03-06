@@ -41,7 +41,7 @@ timeline.push(preload_img);
 // PAGE 1: LANDING PAGE
 var irb = {
   type: jsPsychSurveyMultiSelect,
-  preamble: `<p>Liebe*r Teilnehmer*in, vielen Dank für Ihr Interesse an unserer Studie.</p><p>Dieses Experiment dauert etwa 25 Minuten. Die Datenerhebung erfolgt anonym.<br>Weitere Informationen zu dieser Studie und Ihren Rechten als Teilnehmer*in finden Sie 
+  preamble: `<p>Liebe*r Teilnehmer*in, vielen Dank für Ihr Interesse an unserer Studie.</p><p>Dieses Experiment dauert etwa 45 Minuten. Die Datenerhebung erfolgt anonym.<br>Weitere Informationen zu dieser Studie und Ihren Rechten als Teilnehmer*in finden Sie 
 			<a href="Information_für_Teilnehmende.pdf" target="_blank" rel="noopener noreferrer">hier</a>.</p>`,
   questions: [
     {
@@ -75,7 +75,7 @@ timeline.push(scenario);
 // PAGE 3a: INSTRUCTIONS
 var trial_a = {
 	type: jsPsychSurveyText,
-	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter für Dinge gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das diese benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt, und beziehen Sie dabei bitte die <b>beiden Teile der Traumerscheinung gleichermaßen</b> mit ein. Schreiben Sie dieses Wort <b><nobr>mit Artikel (der, die, das)</nobr></b> in die Textbox, zum Beispiel „die Haustür“.</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
+	preamble: `<p>Im Folgenden werden Ihnen zwei Wörter für Dinge gezeigt, aus denen sich eine Ihrer Traumerscheinungen zusammensetzte. Stellen Sie sich diese Traumerscheinung so gut es geht vor und <b>erfinden Sie ein neues Wort</b>, das diese benennt. Erfinden Sie also ein neues Wort, das es so in dieser Form noch nicht gibt, und beziehen Sie dabei bitte die <b>beiden Teile der Traumerscheinung gleichermaßen</b> mit ein. Es gibt kein Richtig oder Falsch. Schreiben Sie dieses Wort <b><nobr>mit Artikel (der, die, das)</nobr></b> in die Textbox, zum Beispiel „die Haustür“.</p><p>Es wird mehrere Durchgänge geben, sodass Sie nacheinander mehrere Wörter erfinden werden.</p><p>Ein Durchgang kann beispielsweise so aussehen:</p><br/><p><b>MAUS</b><br/><b>ERDBEERE</b></p>`,
 	questions: [
 		{prompt: '<i>Bitte tragen Sie ein Wort ein</i>', required: true, rows: 1, columns: 20}
 	],
@@ -154,6 +154,8 @@ timeline.push(instructions_c);
 
 
 //------------------------------------------------------------------------------
+
+
 // PAGES 4-66: EXPERIMENT
 var trial = {
 	type: jsPsych.timelineVariable('Type'),
@@ -193,7 +195,9 @@ var trial = {
 		Word1: jsPsych.timelineVariable('Word1'),
 		Word2: jsPsych.timelineVariable('Word2'),
 		Gender_comb: jsPsych.timelineVariable('Gender_comb'),
-		Cat_comb: jsPsych.timelineVariable('Cat_comb')
+		Cat_comb: jsPsych.timelineVariable('Cat_comb'),
+		Pair_no1: jsPsych.timelineVariable('Pair_no1'),
+		Pair_no2: jsPsych.timelineVariable('Pair_no2')
 	},
 };
 
@@ -234,7 +238,7 @@ var trials = {
 };
 timeline.push(trials);
 
-// PAGE 67: INSTRUCTIONS
+// PAGE 67: PICTURE INSTRUCTIONS
 var instructions_d = {
 	type: jsPsychHtmlButtonResponse,
 	//preamble: `<p>Alles verstanden? Dann geht es mit Klick auf "Weiter" los"</p>`,
@@ -385,14 +389,51 @@ var debriefing = {
 			{
 				type: 'text',
 				title: 'Wie klar fanden Sie die Anweisungen zu Beginn?',
-				name: 'read',
+				name: 'clarity_of_instructions',
 				isRequired: true,
 			},
 			{
+				type: 'radiogroup',
+				title: 'Was glauben Sie, wie leicht es Ihrer befreundeten Person fallen würde, sich anhand Ihrer Wörter die Traumerscheinungen vorzustellen?',
+				choices: [
+					{
+						'value': 'very_easy', // A unique value to be saved in the survey results.
+						'text': 'sehr leicht' // A display text. When `text` is undefined, `value` is used as display text.
+					},
+					{
+						'value': 'rather_easy', // A unique value to be saved in the survey results.
+						'text': 'eher leicht' // A display text. When `text` is undefined, `value` is used as display text.
+					},
+					{
+						'value': 'rather_difficult', // A unique value to be saved in the survey results.
+						'text': 'eher schwer' // A display text. When `text` is undefined, `value` is used as display text.
+					},
+					{
+						'value': 'very_difficult', // A unique value to be saved in the survey results.
+						'text': 'sehr schwer' // A display text. When `text` is undefined, `value` is used as display text.
+					}
+				],
+				name: 'imaginability',
+				isRequired: true
+			},
+			{
+				type: 'text',
+				title: 'Erinnern Sie sich an eine Ihrer Antworten, auf die Sie besonders stolz sind?',
+				name: 'nicest_answer',
+				isRequired: true
+			},
+			{
 				type: 'comment',
-				title: 'Haben Sie irgendwelche Anmerkungen, z. B. zum Experimentablauf, zu der Art und Weise, wie Sie die Wörter erfunden haben, zu den Bildern oder zu etwas anderem? Wir freuen uns über jede Rückmeldung.',
-				name: 'comments',
+				title: 'Sind Sie einer bestimmten Strategie beim Erfinden der Wörter gefolgt? Wenn ja, welche?',
+				name: 'strategy',
 				rows: 4,
+				isRequired: true
+			},
+			{
+				type: 'comment',
+				title: 'Haben Sie Anmerkungen, z. B. zum Experimentablauf, zu den Bildern oder zu etwas anderem? Wir freuen uns über jede Rückmeldung.',
+				name: 'comments',
+				rows: 4
 			},
 			{
 				type: 'html',
