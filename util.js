@@ -3381,6 +3381,8 @@ function create_Arrays() {
 						Gender_comb: items[i].Gender_comb,
 						Cat_comb: items[i].Cat_comb,
 						Type: jsPsychSurveyMultiChoice,
+            Pair_no1: items[i].Pair_no1,
+            Pair_no2: items[i].Pair_no2
 					};
 					arr_img.push(img_trial);
 					arr_combined.push(img_trial);
